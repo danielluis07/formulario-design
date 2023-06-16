@@ -1,32 +1,4 @@
-"use client";
-
-import { useState } from "react";
-
-import Image from "next/image";
-import mainmobile from "../public/images/illustration-sign-up-mobile.svg";
-import maindesktop from "../public/images/illustration-sign-up-desktop.svg";
-import check from "../public/images/icon-success.svg";
-
-export default function Home() {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState(false);
-  const [buttonClicked, setButtonClicked] = useState(false);
-
-  const handleButtonClicked = () => {
-    console.log(email);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setError(!emailRegex.test(email));
-    setButtonClicked(true);
-  };
-
-  const handleReload = () => {
-    window.location.reload();
-  };
-
-  return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="bg-mainwhite max-w-[1440px] p-10 desktop:rounded-3xl">
-        <div
+<div
           className={`${
             buttonClicked && !error
               ? "hidden"
@@ -98,28 +70,3 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div
-          className={`${
-            buttonClicked && !error
-              ? "flex flex-col w-full desktop:w-[380px]"
-              : "hidden"
-          }`}>
-          <Image src={check} alt="image" priority />
-          <h1 className="text-charcoalgrey text-5xl mt-8">
-            Thanks for subscribing!
-          </h1>
-          <p className="text-charcoalgrey mt-6">
-            A confirmation email has been sent to{" "}
-            <span className="text-charcoalgrey font-bold">{email}</span>. Please
-            open it and click the button inside to confirm your subscription.
-          </p>
-          <button
-            onClick={handleReload}
-            className="text-mainwhite py-4 w-full bg-charcoalgrey rounded-lg mt-8 hover:bg-gradient-to-r from-pink-500 via-tomato to-lightorange hover:shadow-xl hover:shadow-pink-200">
-            Dismiss message
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
